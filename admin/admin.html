@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Lemon SMP – Admin Panel</title>
   <link rel="stylesheet" href="../css/main.css">
+
   <style>
     body {
       background: #0b0f14;
@@ -29,7 +30,7 @@
       border-radius: 10px;
       padding: 15px;
       margin-bottom: 15px;
-      animation: fadeIn 0.5s ease;
+      animation: fadeIn 0.3s ease;
     }
 
     .application h3 {
@@ -37,8 +38,27 @@
       color: #22c55e;
     }
 
-    .application small {
-      color: #9ca3af;
+    .application p {
+      margin: 4px 0;
+    }
+
+    .application button {
+      margin-right: 10px;
+      margin-top: 10px;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .accept {
+      background: #22c55e;
+      color: #000;
+    }
+
+    .reject {
+      background: #ef4444;
+      color: #fff;
     }
 
     .no-apps {
@@ -47,119 +67,78 @@
       margin-top: 40px;
     }
 
-    form {
-      margin-bottom: 30px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    input, textarea, button {
-      padding: 10px;
-      border-radius: 5px;
-      border: 1px solid #1f2933;
-      background: #111827;
-      color: #e5e7eb;
-      font-size: 1rem;
-    }
-
-    button {
-      background: #22c55e;
-      border: none;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background: #16a34a;
-    }
-
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(15px); }
+      from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 
 <body>
-  <div class="admin-container">
-    <h1 class="admin-title">📋 Admin Panel – Aplicații</h1>
 
-    <!-- Form pentru adăugat aplicații -->
-    <form id="appForm">
-      <input type="text" id="username" placeholder="Username" required>
-      <textarea id="message" placeholder="Mesaj aplicatie" required></textarea>
-      <button type="submit">Trimite</button>
-    </form>
+<div class="admin-container">
+  <h1 class="admin-title">📋 Admin Panel – Aplicații</h1>
+  <div id="applications" class="no-apps">Se încarcă aplicațiile...</div>
+</div>
 
-    <!-- Container pentru aplicații -->
-    <div id="applications" class="no-apps">Nu există aplicații încă.</div>
-  </div>
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
-  <!-- Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script>
+  // 🔥 CONFIGUL TĂU REAL
+  const firebaseConfig = {
+    apiKey: "AIzaSyCx1MbK3jJvaUOyn1cbvbqm8-Q0L829af4",
+    authDomain: "lemonsmp-4d57c.firebaseapp.com",
+    projectId: "lemonsmp-4d57c",
+    storageBucket: "lemonsmp-4d57c.firebasestorage.app",
+    messagingSenderId: "949746709761",
+    appId: "1:949746709761:web:bbcc47eb0cb35ab8961700"
+  };
 
-  <script>
-    // Pune aici config-ul tău de la Firebase
-    const firebaseConfig = {
-      apiKey: "XXXX",
-      authDomain: "lemonsmp.firebaseapp.com",
-      projectId: "lemonsmp",
-      storageBucket: "lemonsmp.appspot.com",
-      messagingSenderId: "XXXX",
-      appId: "XXXX"
-    };
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
 
-    // Initialize Firebase
-    const app = firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
+  const container = document.getElementById("applications");
 
-    // Trimite aplicație
-    document.getElementById("appForm").addEventListener("submit", function(e){
-      e.preventDefault();
-      const username = document.getElementById("username").value;
-      const message = document.getElementById("message").value;
+  // 🔄 LIVE UPDATE
+  db.collection("applications")
+    .orderBy("createdAt", "desc")
+    .onSnapshot(snapshot => {
+      container.innerHTML = "";
 
-      db.collection("applications").add({
-        username: username,
-        message: message,
-        status: "pending",
-        createdAt: firebase.firestore.FieldValue.serverTimestamp()
-      })
-      .then(() => {
-        alert("Aplicatie trimisa!");
-        this.reset();
-        displayApplications(); // actualizează lista live
-      })
-      .catch((error) => console.error("Eroare: ", error));
+      if (snapshot.empty) {
+        container.innerHTML = `<div class="no-apps">Nu există aplicații.</div>`;
+        return;
+      }
+
+      snapshot.forEach(doc => {
+        const a = doc.data();
+
+        const div = document.createElement("div");
+        div.className = "application";
+
+        div.innerHTML = `
+          <h3>📌 ${a.type ? a.type.toUpperCase() : "APLICAȚIE"}</h3>
+          ${a.username ? `<p><b>User:</b> ${a.username}</p>` : ""}
+          ${a.name ? `<p><b>Nume:</b> ${a.name}</p>` : ""}
+          ${a.age ? `<p><b>Vârstă:</b> ${a.age}</p>` : ""}
+          ${a.link ? `<p><b>Link:</b> ${a.link}</p>` : ""}
+          ${a.message ? `<p><b>Mesaj:</b> ${a.message}</p>` : ""}
+          <p><b>Status:</b> ${a.status}</p>
+
+          <button class="accept" onclick="updateStatus('${doc.id}','accepted')">Accept</button>
+          <button class="reject" onclick="updateStatus('${doc.id}','rejected')">Reject</button>
+        `;
+
+        container.appendChild(div);
+      });
     });
 
-    // Afișează aplicațiile în admin panel
-    function displayApplications() {
-      const container = document.getElementById("applications");
-      db.collection("applications").orderBy("createdAt", "desc").get()
-        .then(querySnapshot => {
-          container.innerHTML = "";
-          if(querySnapshot.empty) {
-            container.innerHTML = '<div class="no-apps">Nu există aplicații încă.</div>';
-          } else {
-            querySnapshot.forEach(doc => {
-              const app = doc.data();
-              const div = document.createElement("div");
-              div.className = "application";
-              div.innerHTML = `<h3>${app.username}</h3><small>Status: ${app.status}</small><p>${app.message}</p>`;
-              container.appendChild(div);
-            });
-          }
-        })
-        .catch(error => console.error("Eroare la afișare: ", error));
-    }
+  function updateStatus(id, status) {
+    db.collection("applications").doc(id).update({ status });
+  }
+</script>
 
-    // Încarcă aplicațiile la deschiderea paginii
-    window.onload = displayApplications;
-  </script>
-
-  <!-- Scriptul tău admin.js rămâne aici -->
-  <script src="../js/admin.js"></script>
 </body>
 </html>
