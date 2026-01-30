@@ -17,7 +17,6 @@
 
 <body>
 
-<!-- INTRO -->
 <div id="intro-screen">
   <div class="intro-content">
     <h1 class="intro-title">LEMON SMP</h1>
@@ -26,7 +25,6 @@
   </div>
 </div>
 
-<!-- NAVBAR -->
 <nav id="navbar">
   <div class="nav-container">
     <div class="nav-logo">🍋 Lemon SMP</div>
@@ -40,15 +38,12 @@
   </div>
 </nav>
 
-<!-- MAIN -->
 <main id="app">
 
-<!-- HOME -->
 <section id="home" class="page active">
   <div class="hero">
     <h1 class="glitch" data-text="Lemon SMP">Lemon SMP</h1>
     <p class="hero-text">Platformă modernă pentru comunitatea Minecraft SMP</p>
-
     <div class="hero-cards">
       <div class="hero-card"><h3>IP</h3><p>lemonsmp.mnt.li</p></div>
       <div class="hero-card"><h3>Versiune</h3><p>1.20.x</p></div>
@@ -57,7 +52,6 @@
   </div>
 </section>
 
-<!-- FORUM -->
 <section id="forum" class="page">
   <h2>Forum Comunitate</h2>
   <div id="forum-container">
@@ -65,7 +59,6 @@
   </div>
 </section>
 
-<!-- STAFF -->
 <section id="staff" class="page">
   <h2>Staff Lemon SMP</h2>
   <div class="staff-grid">
@@ -76,7 +69,6 @@
   </div>
 </section>
 
-<!-- APPLICATIONS -->
 <section id="applications" class="page">
   <h2>Aplicații</h2>
 
@@ -100,11 +92,11 @@
       <input type="text" id="staff-source" placeholder="De unde ai aflat de server" required>
       <input type="number" id="staff-age" placeholder="Vârsta" required>
       <input type="text" id="staff-cnp" placeholder="Primele 7 cifre CNP" required>
-      <textarea id="staff-why" placeholder="De ce vrei să fii staff?" required></textarea>
-      <input type="text" id="staff-time" placeholder="Câte ore poți juca zilnic" required>
+      <textarea id="staff-why" placeholder="De ce dorești să fii staff la noi" required></textarea>
+      <input type="text" id="staff-time" placeholder="Câte ore poți să petreci pe server" required>
       <textarea id="staff-desc" placeholder="Descrie-te (minim 50 cuvinte)" required></textarea>
-      <input type="text" id="staff-rank" placeholder="Grad dorit (helper/mod/admin/...)" required>
-      <textarea id="staff-diff" placeholder="Cu ce te deosebești de ceilalți?" required></textarea>
+      <input type="text" id="staff-rank" placeholder="Până la ce grad vrei să ajungi" required>
+      <textarea id="staff-diff" placeholder="Cu ce te deosebești de ceilalți" required></textarea>
 
       <button type="submit">Aplică</button>
     </form>
@@ -112,17 +104,23 @@
     <!-- MEDIA -->
     <form class="app-card" id="media-form">
       <h3>Aplicație Media</h3>
-      <input type="text" id="media-link" placeholder="YouTube / TikTok" required>
+
+      <input type="text" id="media-name" placeholder="Nume" required>
+      <input type="text" id="media-mc" placeholder="Nume MC" required>
+      <input type="text" id="media-platform" placeholder="TikTok / YouTube" required>
+      <input type="number" id="media-followers" placeholder="Număr urmăritori (minim 1000)" required>
+      <input type="text" id="media-live" placeholder="Cât de des poți face live" required>
+      <textarea id="media-agree" placeholder="Ești conștient că trebuie să postezi minim 2 videoclipuri pe săptămână?" required></textarea>
+
       <button type="submit">Aplică</button>
     </form>
 
   </div>
 </section>
 
-<!-- STATS -->
 <section id="stats" class="page">
   <h2>Server</h2>
-  <p>Statistici server în curând.</p>
+  <p>Statistici în curând.</p>
 </section>
 
 </main>
@@ -131,25 +129,22 @@
   <p>© 2026 Lemon SMP • Platformă Web</p>
 </footer>
 
-<!-- FIREBASE -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
 <script>
-  const firebaseConfig = {
+  firebase.initializeApp({
     apiKey: "AIzaSyCx1MbK3jJvaUOyn1cbvbqm8-Q0L829af4",
     authDomain: "lemonsmp-4d57c.firebaseapp.com",
     projectId: "lemonsmp-4d57c",
     storageBucket: "lemonsmp-4d57c.firebasestorage.app",
     messagingSenderId: "949746709761",
     appId: "1:949746709761:web:bbcc47eb0cb35ab8961700"
-  };
+  });
 
-  firebase.initializeApp(firebaseConfig);
   const db = firebase.firestore();
 
-  // UNBAN
-  document.getElementById("unban-form").addEventListener("submit", e => {
+  document.getElementById("unban-form").onsubmit = e => {
     e.preventDefault();
     db.collection("applications").add({
       type: "unban",
@@ -159,10 +154,9 @@
     });
     alert("Cerere Unban trimisă!");
     e.target.reset();
-  });
+  };
 
-  // STAFF
-  document.getElementById("staff-form").addEventListener("submit", e => {
+  document.getElementById("staff-form").onsubmit = e => {
     e.preventDefault();
     db.collection("applications").add({
       type: "staff",
@@ -181,19 +175,23 @@
     });
     alert("Aplicație Staff trimisă!");
     e.target.reset();
-  });
+  };
 
-  // MEDIA
-  document.getElementById("media-form").addEventListener("submit", e => {
+  document.getElementById("media-form").onsubmit = e => {
     e.preventDefault();
     db.collection("applications").add({
       type: "media",
-      link: media-link.value,
+      name: media-name.value,
+      mc: media-mc.value,
+      platform: media-platform.value,
+      followers: media-followers.value,
+      live: media-live.value,
+      agree: media-agree.value,
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
     });
     alert("Aplicație Media trimisă!");
     e.target.reset();
-  });
+  };
 </script>
 
 <script src="js/core.js"></script>
