@@ -47,6 +47,32 @@
       margin-top: 40px;
     }
 
+    form {
+      margin-bottom: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    input, textarea, button {
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #1f2933;
+      background: #111827;
+      color: #e5e7eb;
+      font-size: 1rem;
+    }
+
+    button {
+      background: #22c55e;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #16a34a;
+    }
+
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(15px); }
       to { opacity: 1; transform: translateY(0); }
@@ -57,9 +83,83 @@
 <body>
   <div class="admin-container">
     <h1 class="admin-title">📋 Admin Panel – Aplicații</h1>
-    <div id="applications"></div>
+
+    <!-- Form pentru adăugat aplicații -->
+    <form id="appForm">
+      <input type="text" id="username" placeholder="Username" required>
+      <textarea id="message" placeholder="Mesaj aplicatie" required></textarea>
+      <button type="submit">Trimite</button>
+    </form>
+
+    <!-- Container pentru aplicații -->
+    <div id="applications" class="no-apps">Nu există aplicații încă.</div>
   </div>
 
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+  <script>
+    // Pune aici config-ul tău de la Firebase
+    const firebaseConfig = {
+      apiKey: "XXXX",
+      authDomain: "lemonsmp.firebaseapp.com",
+      projectId: "lemonsmp",
+      storageBucket: "lemonsmp.appspot.com",
+      messagingSenderId: "XXXX",
+      appId: "XXXX"
+    };
+
+    // Initialize Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    // Trimite aplicație
+    document.getElementById("appForm").addEventListener("submit", function(e){
+      e.preventDefault();
+      const username = document.getElementById("username").value;
+      const message = document.getElementById("message").value;
+
+      db.collection("applications").add({
+        username: username,
+        message: message,
+        status: "pending",
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      })
+      .then(() => {
+        alert("Aplicatie trimisa!");
+        this.reset();
+        displayApplications(); // actualizează lista live
+      })
+      .catch((error) => console.error("Eroare: ", error));
+    });
+
+    // Afișează aplicațiile în admin panel
+    function displayApplications() {
+      const container = document.getElementById("applications");
+      db.collection("applications").orderBy("createdAt", "desc").get()
+        .then(querySnapshot => {
+          container.innerHTML = "";
+          if(querySnapshot.empty) {
+            container.innerHTML = '<div class="no-apps">Nu există aplicații încă.</div>';
+          } else {
+            querySnapshot.forEach(doc => {
+              const app = doc.data();
+              const div = document.createElement("div");
+              div.className = "application";
+              div.innerHTML = `<h3>${app.username}</h3><small>Status: ${app.status}</small><p>${app.message}</p>`;
+              container.appendChild(div);
+            });
+          }
+        })
+        .catch(error => console.error("Eroare la afișare: ", error));
+    }
+
+    // Încarcă aplicațiile la deschiderea paginii
+    window.onload = displayApplications;
+  </script>
+
+  <!-- Scriptul tău admin.js rămâne aici -->
   <script src="../js/admin.js"></script>
 </body>
 </html>
