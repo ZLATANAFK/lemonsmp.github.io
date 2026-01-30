@@ -29,26 +29,28 @@
       border: 1px solid #1f2933;
       border-radius: 10px;
       padding: 15px;
-      margin-bottom: 15px;
+      margin-bottom: 20px;
       animation: fadeIn 0.3s ease;
     }
 
     .application h3 {
-      margin: 0 0 10px;
+      margin-bottom: 10px;
       color: #22c55e;
     }
 
     .application p {
       margin: 4px 0;
+      line-height: 1.4;
     }
 
     .application button {
-      margin-right: 10px;
       margin-top: 10px;
-      padding: 8px 12px;
+      margin-right: 10px;
+      padding: 8px 14px;
       border: none;
-      border-radius: 5px;
+      border-radius: 6px;
       cursor: pointer;
+      font-weight: bold;
     }
 
     .accept {
@@ -86,22 +88,20 @@
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
 <script>
-  // 🔥 CONFIGUL TĂU REAL
-  const firebaseConfig = {
+  // 🔥 Firebase config
+  firebase.initializeApp({
     apiKey: "AIzaSyCx1MbK3jJvaUOyn1cbvbqm8-Q0L829af4",
     authDomain: "lemonsmp-4d57c.firebaseapp.com",
     projectId: "lemonsmp-4d57c",
     storageBucket: "lemonsmp-4d57c.firebasestorage.app",
     messagingSenderId: "949746709761",
     appId: "1:949746709761:web:bbcc47eb0cb35ab8961700"
-  };
+  });
 
-  firebase.initializeApp(firebaseConfig);
   const db = firebase.firestore();
-
   const container = document.getElementById("applications");
 
-  // 🔄 LIVE UPDATE
+  // 🔄 LIVE LOAD
   db.collection("applications")
     .orderBy("createdAt", "desc")
     .onSnapshot(snapshot => {
@@ -114,27 +114,63 @@
 
       snapshot.forEach(doc => {
         const a = doc.data();
-
         const div = document.createElement("div");
         div.className = "application";
 
-        div.innerHTML = `
-          <h3>📌 ${a.type ? a.type.toUpperCase() : "APLICAȚIE"}</h3>
-          ${a.username ? `<p><b>User:</b> ${a.username}</p>` : ""}
-          ${a.name ? `<p><b>Nume:</b> ${a.name}</p>` : ""}
-          ${a.age ? `<p><b>Vârstă:</b> ${a.age}</p>` : ""}
-          ${a.link ? `<p><b>Link:</b> ${a.link}</p>` : ""}
-          ${a.message ? `<p><b>Mesaj:</b> ${a.message}</p>` : ""}
-          <p><b>Status:</b> ${a.status}</p>
+        // ===== STAFF =====
+        if (a.type === "staff") {
+          div.innerHTML = `
+            <h3>🛡️ STAFF – ${a.name}</h3>
+            <p><b>MC:</b> ${a.mc}</p>
+            <p><b>Ore jucate:</b> ${a.hours}</p>
+            <p><b>Sursă:</b> ${a.source}</p>
+            <p><b>Vârstă:</b> ${a.age}</p>
+            <p><b>CNP:</b> ${a.cnp}</p>
+            <p><b>De ce staff:</b><br>${a.why}</p>
+            <p><b>Ore disponibile:</b> ${a.time}</p>
+            <p><b>Descriere:</b><br>${a.desc}</p>
+            <p><b>Grad dorit:</b> ${a.rank}</p>
+            <p><b>Diferență:</b><br>${a.diff}</p>
+            <p><b>Status:</b> ${a.status || "pending"}</p>
 
-          <button class="accept" onclick="updateStatus('${doc.id}','accepted')">Accept</button>
-          <button class="reject" onclick="updateStatus('${doc.id}','rejected')">Reject</button>
-        `;
+            <button class="accept" onclick="updateStatus('${doc.id}','accepted')">Accept</button>
+            <button class="reject" onclick="updateStatus('${doc.id}','rejected')">Reject</button>
+          `;
+        }
+
+        // ===== MEDIA =====
+        if (a.type === "media") {
+          div.innerHTML = `
+            <h3>🎥 MEDIA – ${a.name}</h3>
+            <p><b>MC:</b> ${a.mc}</p>
+            <p><b>Platformă:</b> ${a.platform}</p>
+            <p><b>Urmăritori:</b> ${a.followers}</p>
+            <p><b>Live:</b> ${a.live}</p>
+            <p><b>Confirmare:</b><br>${a.agree}</p>
+            <p><b>Status:</b> ${a.status || "pending"}</p>
+
+            <button class="accept" onclick="updateStatus('${doc.id}','accepted')">Accept</button>
+            <button class="reject" onclick="updateStatus('${doc.id}','rejected')">Reject</button>
+          `;
+        }
+
+        // ===== UNBAN =====
+        if (a.type === "unban") {
+          div.innerHTML = `
+            <h3>🚫 UNBAN – ${a.username}</h3>
+            <p><b>Motiv:</b><br>${a.reason}</p>
+            <p><b>Status:</b> ${a.status || "pending"}</p>
+
+            <button class="accept" onclick="updateStatus('${doc.id}','accepted')">Accept</button>
+            <button class="reject" onclick="updateStatus('${doc.id}','rejected')">Reject</button>
+          `;
+        }
 
         container.appendChild(div);
       });
     });
 
+  // 🔁 UPDATE STATUS
   function updateStatus(id, status) {
     db.collection("applications").doc(id).update({ status });
   }
