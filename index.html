@@ -9,148 +9,141 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{
   font-family:Inter,sans-serif;
-  background:radial-gradient(circle at top,#020617,#020617,#000);
+  background:linear-gradient(135deg,#040710,#0a0f23);
   color:#e5e7eb;
 }
-.container{max-width:1100px;margin:auto;padding:40px}
-.hero{text-align:center;padding:80px 20px}
-.hero h1{font-size:3.2rem;font-weight:800}
-.hero span{color:#facc15}
-.ip{
-  margin:25px auto;
-  padding:14px 22px;
-  background:#020617;
-  border-radius:14px;
+.container{max-width:1000px;margin:auto;padding:40px}
+header{text-align:center;padding:60px 0}
+header h1{font-size:3.2rem;color:#facc15;font-weight:800}
+header p{font-size:1.2rem;opacity:.8}
+
+.button{
   display:inline-block;
-  cursor:pointer;
-  transition:.2s;
-}
-.ip:hover{background:#020617cc}
-.btn{
-  display:inline-block;
-  margin:10px;
   padding:14px 28px;
   background:#2563eb;
-  border-radius:14px;
   color:white;
+  border-radius:12px;
   text-decoration:none;
   font-weight:600;
+  margin:10px;
   transition:.3s;
 }
-.btn:hover{transform:scale(1.05);background:#1d4ed8}
+.button:hover{background:#1d4ed8}
 
-.section{margin-top:80px}
-.section h2{text-align:center;font-size:2.2rem;margin-bottom:40px}
+.section{margin-top:60px}
+.section h2{text-align:center;font-size:2.4rem;margin-bottom:30px;color:#38bdf8}
 
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
   gap:20px;
 }
 
+/* staff cards */
 .card{
   background:rgba(255,255,255,0.05);
-  backdrop-filter:blur(10px);
-  padding:25px;
-  border-radius:18px;
+  backdrop-filter:blur(8px);
+  padding:22px;
+  border-radius:14px;
   text-align:center;
-}
-
-/* Accordion regulament */
-details{
-  background:rgba(255,255,255,0.04);
-  border-radius:16px;
-  padding:20px;
-  margin-bottom:15px;
-}
-summary{
   font-weight:600;
   font-size:1.1rem;
+  color:#f1f5f9;
+}
+
+/* accordion */
+details{
+  background:rgba(255,255,255,0.04);
+  padding:18px;
+  border-radius:12px;
+  margin-bottom:12px;
+}
+summary{
+  font-size:1.15rem;
+  font-weight:600;
   cursor:pointer;
 }
-.rule{
-  margin-top:15px;
-  color:#cbd5f5;
-}
-.sanction{color:#facc15;font-weight:600;margin-top:5px}
+.rule{margin-top:12px;opacity:.85}
+.sanction{margin-top:8px;color:#facc15;font-weight:700}
 
 footer{
-  margin-top:100px;
   text-align:center;
+  margin-top:80px;
   opacity:.6;
   font-size:.9rem;
 }
 </style>
-</head>
 
+</head>
 <body>
+
 <div class="container">
 
-<!-- HERO -->
-<div class="hero">
-  <h1>🍋 <span>LEMON SMP</span></h1>
-
-  <div class="ip" onclick="navigator.clipboard.writeText('lemonsmp.mnt.li')">
-    IP: <b>lemonsmp.mnt.li</b> (click to copy)
+<!-- HEADER -->
+<header>
+  <h1>🍋 LEMON SMP</h1>
+  <p>Survival • Comunitate • Distracție</p>
+  <div>
+    <div class="button" onclick="navigator.clipboard.writeText('lemonsmp.mnt.li')">
+      IP: lemonsmp.mnt.li (Click to Copy)
+    </div>
+    <a class="button" href="https://discord.gg/discord-link-aici" target="_blank">Join Discord</a>
   </div>
-
-  <br>
-  <a class="btn" href="LINK_DISCORD_AICI" target="_blank">Join Discord</a>
-</div>
+</header>
 
 <!-- REGULAMENT -->
 <div class="section">
   <h2>📜 Regulament</h2>
 
   <details>
-    <summary>1️⃣ Comportare respectuoasă</summary>
+    <summary>1) Comportare respectuoasă</summary>
     <div class="rule">
       Tratează toți jucătorii și staff-ul cu respect. Limbajul ofensator sau hărțuirea nu sunt tolerate.
-      <div class="sanction">Sancțiune: Warn / Mute 30 min</div>
+      <div class="sanction">⚠️ Sancțiune: Warn / Mute 30 min</div>
     </div>
   </details>
 
   <details>
-    <summary>2️⃣ Cheat-uri & exploatări</summary>
+    <summary>2) Interzis cheat-uri și exploatări</summary>
     <div class="rule">
-      Hack-urile, cheat-urile și glitch-urile sunt strict interzise.
-      <div class="sanction">Sancțiune: Ban 14 zile / Permanent</div>
+      Fără hack-uri/cheat-uri sau bug-uri pentru avantaje.
+      <div class="sanction">⚠️ Sancțiune: Ban 14 zile / Permanent</div>
     </div>
   </details>
 
   <details>
-    <summary>3️⃣ Spam & conținut nepotrivit</summary>
+    <summary>3) Spam, caps lock și conținut nepotrivit</summary>
     <div class="rule">
-      Spam-ul, caps lock-ul excesiv și conținutul ilegal nu sunt permise.
-      <div class="sanction">Sancțiune: Mute 30 min / Permanent</div>
+      Fără spam/caps lock excesiv sau conținut ofensator.
+      <div class="sanction">⚠️ Sancțiune: Mute 30 min / Permanent</div>
     </div>
   </details>
 
   <details>
-    <summary>4️⃣ Tranzacții corecte</summary>
+    <summary>4) Tranzacții corecte</summary>
     <div class="rule">
-      Escrocheriile și fraudele sunt interzise.
-      <div class="sanction">Sancțiune: Warn</div>
+      Toate schimburile trebuie să fie oneste.
+      <div class="sanction">⚠️ Sancțiune: Warn</div>
     </div>
   </details>
 
   <details>
-    <summary>5️⃣ Politică & religie</summary>
+    <summary>5) Fără discuții politice sau religioase</summary>
     <div class="rule">
-      Discuțiile sensibile nu sunt permise.
-      <div class="sanction">Sancțiune: Ban 2 zile</div>
+      Evită subiecte sensibile.
+      <div class="sanction">⚠️ Sancțiune: Ban 2 zile</div>
     </div>
   </details>
 
   <details>
-    <summary>6️⃣ Deciziile staff-ului</summary>
+    <summary>6) Respectarea deciziilor staff-ului</summary>
     <div class="rule">
-      Respectă indicațiile staff-ului.
-      <div class="sanction">Sancțiune: Warn</div>
+      Urmează indicațiile staff-ului.
+      <div class="sanction">⚠️ Sancțiune: Warn</div>
     </div>
   </details>
 
-  <p style="text-align:center;margin-top:20px;color:#facc15;font-weight:600">
+  <p style="text-align:center;margin-top:18px;color:#facc15;font-weight:700">
     ❗ La 3 warn-uri → BAN 7 zile
   </p>
 </div>
@@ -158,14 +151,13 @@ footer{
 <!-- STAFF -->
 <div class="section">
   <h2>👮 Staff</h2>
-
   <div class="grid">
-    <div class="card">👑 <b>Fondator</b></div>
-    <div class="card">⭐ <b>Co-Fondator</b></div>
-    <div class="card">🛠️ <b>Tehnic</b></div>
-    <div class="card">🛡️ <b>Admin</b></div>
-    <div class="card">🔧 <b>Moderator</b></div>
-    <div class="card">💬 <b>Helper</b></div>
+    <div class="card">👑 Fondator</div>
+    <div class="card">⭐ Co-Fondator</div>
+    <div class="card">🛠️ Tehnic</div>
+    <div class="card">🛡️ Admin</div>
+    <div class="card">🔧 Moderator</div>
+    <div class="card">💬 Helper</div>
   </div>
 </div>
 
@@ -173,14 +165,15 @@ footer{
 <div class="section">
   <h2>💬 Comunitate</h2>
   <div class="card">
-    Discord activ • Comunitate prietenoasă • Events
+    Suntem o comunitate prietenoasă. Intră pe Discord pentru events, joinuri și talk!
   </div>
 </div>
 
 <footer>
-  © Lemon SMP • Minecraft Survival Multiplayer
+  © 2026 Lemon SMP • Minecraft
 </footer>
 
 </div>
+
 </body>
 </html>
