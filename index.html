@@ -1,218 +1,159 @@
 <!DOCTYPE html>
 <html lang="ro">
 <head>
-<meta charset="UTF-8">
-<title>Lemon SMP • Official</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>Lemon SMP Platform</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- SEO / META -->
+  <meta name="description" content="Lemon SMP – Platformă web pentru comunitatea Minecraft">
+  <meta name="author" content="ZLATANAFK">
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{
-  font-family:Inter,sans-serif;
-  background:#f6f7f9;
-  color:#1f2937;
-}
+  <!-- FONTS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-/* HEADER */
-header{
-  background:white;
-  border-bottom:1px solid #e5e7eb;
-  padding:60px 20px;
-  text-align:center;
-}
-
-header h1{
-  font-size:2.4rem;
-  font-weight:700;
-  margin-bottom:10px;
-}
-
-header p{
-  color:#6b7280;
-}
-
-.badges{
-  margin-top:25px;
-}
-
-.badge{
-  display:inline-block;
-  margin:6px;
-  padding:10px 18px;
-  background:#22c55e;
-  color:white;
-  border-radius:8px;
-  font-weight:600;
-}
-
-/* CONTAINER */
-.container{
-  max-width:1100px;
-  margin:auto;
-  padding:60px 20px;
-}
-
-.section{
-  margin-bottom:70px;
-}
-
-.section h2{
-  font-size:1.5rem;
-  margin-bottom:25px;
-  border-left:4px solid #22c55e;
-  padding-left:12px;
-}
-
-/* GRID */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:20px;
-}
-
-/* CARD */
-.card{
-  background:white;
-  border-radius:12px;
-  padding:25px;
-  box-shadow:0 10px 25px rgba(0,0,0,.05);
-}
-
-.card h3{
-  margin-bottom:10px;
-  font-size:1.1rem;
-}
-
-/* FORM */
-form input, form textarea{
-  width:100%;
-  margin-top:10px;
-  padding:10px;
-  border:1px solid #d1d5db;
-  border-radius:6px;
-  font-family:Inter,sans-serif;
-}
-
-form button{
-  margin-top:15px;
-  padding:12px;
-  width:100%;
-  background:#22c55e;
-  border:none;
-  color:white;
-  border-radius:6px;
-  font-weight:600;
-  cursor:pointer;
-}
-
-/* STAFF */
-.staff-role{
-  font-weight:600;
-  color:#22c55e;
-  margin-bottom:6px;
-}
-
-/* FOOTER */
-footer{
-  background:white;
-  border-top:1px solid #e5e7eb;
-  padding:25px;
-  text-align:center;
-  color:#6b7280;
-}
-</style>
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/main.css">
 </head>
 
 <body>
 
-<header>
-  <h1>Lemon SMP</h1>
-  <p>Server Minecraft Survival Multiplayer</p>
-
-  <div class="badges">
-    <span class="badge">IP: lemonsmp.mnt.li</span>
-    <span class="badge">Versiune: 1.20.x</span>
-  </div>
-</header>
-
-<div class="container">
-
-<!-- FORUM -->
-<div class="section">
-  <h2>Forum</h2>
-
-  <div class="grid">
-
-    <div class="card">
-      <h3>Cerere Unban</h3>
-      <form>
-        <input placeholder="Nume Minecraft">
-        <textarea rows="4" placeholder="Motivul banului"></textarea>
-        <textarea rows="4" placeholder="De ce consideri că meriți unban"></textarea>
-        <button>Trimite cererea</button>
-      </form>
-    </div>
-
-    <div class="card">
-      <h3>Aplicație Staff</h3>
-      <form>
-        <input placeholder="Nume Minecraft">
-        <input placeholder="Vârsta">
-        <textarea rows="4" placeholder="Experiență anterioară"></textarea>
-        <textarea rows="4" placeholder="De ce vrei să intri în staff"></textarea>
-        <button>Aplică</button>
-      </form>
-    </div>
-
-    <div class="card">
-      <h3>Aplicație Media</h3>
-      <form>
-        <input placeholder="Nume Minecraft">
-        <input placeholder="YouTube / TikTok / Twitch">
-        <textarea rows="4" placeholder="De ce vrei Media"></textarea>
-        <button>Aplică</button>
-      </form>
-    </div>
-
+<!-- ================= INTRO / OPENING ================= -->
+<div id="intro-screen">
+  <div class="intro-content">
+    <h1 class="intro-title">LEMON SMP</h1>
+    <p class="intro-subtitle">Initializing platform...</p>
+    <div class="intro-loader"></div>
   </div>
 </div>
 
-<!-- STAFF -->
-<div class="section">
-  <h2>Echipa Staff</h2>
-
-  <div class="grid">
-
-    <div class="card">
-      <div class="staff-role">Fondator</div>
-      Mant0ni0<br>Kira
-    </div>
-
-    <div class="card">
-      <div class="staff-role">Co-Fondator</div>
-      qxerror
-    </div>
-
-    <div class="card">
-      <div class="staff-role">Tehnic</div>
-      Samir
-    </div>
-
-    <div class="card">
-      <div class="staff-role">Admin</div>
-      Deyyu
-    </div>
-
+<!-- ================= NAVBAR ================= -->
+<nav id="navbar">
+  <div class="nav-container">
+    <div class="nav-logo">🍋 Lemon SMP</div>
+    <ul class="nav-links">
+      <li data-page="home" class="active">Home</li>
+      <li data-page="forum">Forum</li>
+      <li data-page="staff">Staff</li>
+      <li data-page="applications">Aplicații</li>
+      <li data-page="stats">Server</li>
+    </ul>
   </div>
-</div>
+</nav>
 
-</div>
+<!-- ================= MAIN APP ================= -->
+<main id="app">
 
+  <!-- ===== HOME ===== -->
+  <section id="home" class="page active">
+    <div class="hero">
+      <h1 class="glitch" data-text="Lemon SMP">Lemon SMP</h1>
+      <p class="hero-text">
+        Platformă modernă pentru comunitatea Minecraft Survival Multiplayer
+      </p>
+
+      <div class="hero-cards">
+        <div class="hero-card">
+          <h3>IP Server</h3>
+          <p>lemonsmp.mnt.li</p>
+        </div>
+        <div class="hero-card">
+          <h3>Versiune</h3>
+          <p>1.20.x</p>
+        </div>
+        <div class="hero-card">
+          <h3>Status</h3>
+          <p class="online">ONLINE</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FORUM ===== -->
+  <section id="forum" class="page">
+    <h2>Forum Comunitate</h2>
+    <div id="forum-container">
+      <!-- Populat din JS -->
+    </div>
+  </section>
+
+  <!-- ===== STAFF ===== -->
+  <section id="staff" class="page">
+    <h2>Staff Lemon SMP</h2>
+    <div class="staff-grid">
+      <div class="staff-card">
+        <span class="role">Fondator</span>
+        <h3>Mant0ni0</h3>
+        <h3>Kira</h3>
+      </div>
+
+      <div class="staff-card">
+        <span class="role">Co-Fondator</span>
+        <h3>qxerror</h3>
+      </div>
+
+      <div class="staff-card">
+        <span class="role">Tehnic</span>
+        <h3>Samir</h3>
+      </div>
+
+      <div class="staff-card">
+        <span class="role">Admin</span>
+        <h3>Deyyu</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== APPLICATIONS ===== -->
+  <section id="applications" class="page">
+    <h2>Aplicații</h2>
+
+    <div class="applications-grid">
+      <form class="app-card" id="unban-form">
+        <h3>Cerere Unban</h3>
+        <input type="text" placeholder="Nume Minecraft" required>
+        <textarea placeholder="Motivul cererii" required></textarea>
+        <button type="submit">Trimite</button>
+      </form>
+
+      <form class="app-card" id="staff-form">
+        <h3>Aplicație Staff</h3>
+        <input type="text" placeholder="Nume" required>
+        <input type="number" placeholder="Vârstă" required>
+        <button type="submit">Aplică</button>
+      </form>
+
+      <form class="app-card" id="media-form">
+        <h3>Aplicație Media</h3>
+        <input type="text" placeholder="YouTube / TikTok" required>
+        <button type="submit">Aplică</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ===== STATS ===== -->
+  <section id="stats" class="page">
+    <h2>Server Stats</h2>
+    <div class="stats-grid">
+      <div class="stat-card">Players online: <span id="players">42</span></div>
+      <div class="stat-card">Cereri totale: <span id="requests">0</span></div>
+      <div class="stat-card">Uptime: 99.9%</div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
 <footer>
-  © 2026 Lemon SMP • Website oficial
+  <p>© 2026 Lemon SMP • Platformă Web</p>
 </footer>
+
+<!-- ================= JS ================= -->
+<script src="js/core.js"></script>
+<script src="js/effects.js"></script>
+<script src="js/forum.js"></script>
 
 </body>
 </html>
