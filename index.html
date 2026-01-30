@@ -4,16 +4,20 @@
   <meta charset="UTF-8">
   <title>Lemon SMP Platform</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <meta name="description" content="Lemon SMP – Platformă web pentru comunitatea Minecraft">
   <meta name="author" content="ZLATANAFK">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="css/main.css">
 </head>
 
 <body>
 
+<!-- INTRO -->
 <div id="intro-screen">
   <div class="intro-content">
     <h1 class="intro-title">LEMON SMP</h1>
@@ -22,6 +26,7 @@
   </div>
 </div>
 
+<!-- NAVBAR -->
 <nav id="navbar">
   <div class="nav-container">
     <div class="nav-logo">🍋 Lemon SMP</div>
@@ -35,15 +40,43 @@
   </div>
 </nav>
 
+<!-- MAIN -->
 <main id="app">
 
+<!-- HOME -->
 <section id="home" class="page active">
   <div class="hero">
     <h1 class="glitch" data-text="Lemon SMP">Lemon SMP</h1>
-    <p class="hero-text">Platformă modernă pentru comunitatea Minecraft Survival Multiplayer</p>
+    <p class="hero-text">Platformă modernă pentru comunitatea Minecraft SMP</p>
+
+    <div class="hero-cards">
+      <div class="hero-card"><h3>IP</h3><p>lemonsmp.mnt.li</p></div>
+      <div class="hero-card"><h3>Versiune</h3><p>1.20.x</p></div>
+      <div class="hero-card"><h3>Status</h3><p class="online">ONLINE</p></div>
+    </div>
   </div>
 </section>
 
+<!-- FORUM -->
+<section id="forum" class="page">
+  <h2>Forum Comunitate</h2>
+  <div id="forum-container">
+    <p>Forum în construcție.</p>
+  </div>
+</section>
+
+<!-- STAFF -->
+<section id="staff" class="page">
+  <h2>Staff Lemon SMP</h2>
+  <div class="staff-grid">
+    <div class="staff-card"><span class="role">Fondator</span><h3>Mant0ni0</h3></div>
+    <div class="staff-card"><span class="role">Co-Fondator</span><h3>qxerror</h3></div>
+    <div class="staff-card"><span class="role">Tehnic</span><h3>Samir</h3></div>
+    <div class="staff-card"><span class="role">Admin</span><h3>Deyyu</h3></div>
+  </div>
+</section>
+
+<!-- APPLICATIONS -->
 <section id="applications" class="page">
   <h2>Aplicații</h2>
 
@@ -61,19 +94,17 @@
     <form class="app-card" id="staff-form">
       <h3>Aplicație Staff</h3>
 
-      <input type="text" id="staff-name" placeholder="Nume" required>
+      <input type="text" id="staff-name" placeholder="Nume real" required>
       <input type="text" id="staff-mc" placeholder="Nume MC" required>
-      <input type="number" id="staff-hours" placeholder="Ore jucate pe server (minim 30)" required>
-      <input type="text" id="staff-source" placeholder="De unde ai aflat de serverul nostru" required>
+      <input type="number" id="staff-hours" placeholder="Ore jucate (minim 30)" required>
+      <input type="text" id="staff-source" placeholder="De unde ai aflat de server" required>
       <input type="number" id="staff-age" placeholder="Vârsta" required>
-      <input type="text" id="staff-cnp" placeholder="Primele 7 cifre din CNP" required>
-
-      <textarea id="staff-why" placeholder="De ce dorești să fii staff la noi" required></textarea>
-      <textarea id="staff-time" placeholder="Câte ore poți să petreci pe acest server" required></textarea>
-      <textarea id="staff-desc" placeholder="Descrie-te în minim 50 cuvinte" required></textarea>
-
-      <input type="text" id="staff-rank" placeholder="Până la ce grad vrei să ajungi (helper / moderator / admin / tehnic / manager)" required>
-      <textarea id="staff-diff" placeholder="Cu ce te deosebești de ceilalți" required></textarea>
+      <input type="text" id="staff-cnp" placeholder="Primele 7 cifre CNP" required>
+      <textarea id="staff-why" placeholder="De ce vrei să fii staff?" required></textarea>
+      <input type="text" id="staff-time" placeholder="Câte ore poți juca zilnic" required>
+      <textarea id="staff-desc" placeholder="Descrie-te (minim 50 cuvinte)" required></textarea>
+      <input type="text" id="staff-rank" placeholder="Grad dorit (helper/mod/admin/...)" required>
+      <textarea id="staff-diff" placeholder="Cu ce te deosebești de ceilalți?" required></textarea>
 
       <button type="submit">Aplică</button>
     </form>
@@ -88,12 +119,19 @@
   </div>
 </section>
 
+<!-- STATS -->
+<section id="stats" class="page">
+  <h2>Server</h2>
+  <p>Statistici server în curând.</p>
+</section>
+
 </main>
 
 <footer>
   <p>© 2026 Lemon SMP • Platformă Web</p>
 </footer>
 
+<!-- FIREBASE -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
@@ -110,36 +148,57 @@
   firebase.initializeApp(firebaseConfig);
   const db = firebase.firestore();
 
-  document.getElementById("staff-form").addEventListener("submit", function(e){
+  // UNBAN
+  document.getElementById("unban-form").addEventListener("submit", e => {
     e.preventDefault();
+    db.collection("applications").add({
+      type: "unban",
+      username: unban-username.value,
+      reason: unban-reason.value,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    alert("Cerere Unban trimisă!");
+    e.target.reset();
+  });
 
-    const hours = Number(document.getElementById("staff-hours").value);
-    if (hours < 30) {
-      alert("Ai nevoie de minim 30 ore jucate pe server.");
-      return;
-    }
-
+  // STAFF
+  document.getElementById("staff-form").addEventListener("submit", e => {
+    e.preventDefault();
     db.collection("applications").add({
       type: "staff",
       name: staff-name.value,
       mc: staff-mc.value,
-      hours: hours,
+      hours: staff-hours.value,
       source: staff-source.value,
       age: staff-age.value,
       cnp: staff-cnp.value,
       why: staff-why.value,
       time: staff-time.value,
-      description: staff-desc.value,
+      desc: staff-desc.value,
       rank: staff-rank.value,
-      difference: staff-diff.value,
-      status: "pending",
+      diff: staff-diff.value,
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
-    }).then(() => {
-      alert("Aplicația Staff a fost trimisă!");
-      e.target.reset();
     });
+    alert("Aplicație Staff trimisă!");
+    e.target.reset();
+  });
+
+  // MEDIA
+  document.getElementById("media-form").addEventListener("submit", e => {
+    e.preventDefault();
+    db.collection("applications").add({
+      type: "media",
+      link: media-link.value,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    alert("Aplicație Media trimisă!");
+    e.target.reset();
   });
 </script>
+
+<script src="js/core.js"></script>
+<script src="js/effects.js"></script>
+<script src="js/forum.js"></script>
 
 </body>
 </html>
