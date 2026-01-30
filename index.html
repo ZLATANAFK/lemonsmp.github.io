@@ -2,183 +2,217 @@
 <html lang="ro">
 <head>
 <meta charset="UTF-8">
-<title>Lemon SMP</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<title>Lemon SMP • Official</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{
   font-family:Inter,sans-serif;
-  background:linear-gradient(135deg,#040710,#0a0f23);
-  color:#e5e7eb;
+  background:#f6f7f9;
+  color:#1f2937;
 }
-.container{max-width:1000px;margin:auto;padding:40px}
-header{text-align:center;padding:60px 0}
-header h1{font-size:3.2rem;color:#facc15;font-weight:800}
-header p{font-size:1.2rem;opacity:.8}
 
-.button{
+/* HEADER */
+header{
+  background:white;
+  border-bottom:1px solid #e5e7eb;
+  padding:60px 20px;
+  text-align:center;
+}
+
+header h1{
+  font-size:2.4rem;
+  font-weight:700;
+  margin-bottom:10px;
+}
+
+header p{
+  color:#6b7280;
+}
+
+.badges{
+  margin-top:25px;
+}
+
+.badge{
   display:inline-block;
-  padding:14px 28px;
-  background:#2563eb;
+  margin:6px;
+  padding:10px 18px;
+  background:#22c55e;
   color:white;
-  border-radius:12px;
-  text-decoration:none;
+  border-radius:8px;
   font-weight:600;
-  margin:10px;
-  transition:.3s;
-  cursor:pointer;
 }
-.button:hover{background:#1d4ed8}
 
-.section{margin-top:60px}
-.section h2{text-align:center;font-size:2.4rem;margin-bottom:30px;color:#38bdf8}
+/* CONTAINER */
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:60px 20px;
+}
 
+.section{
+  margin-bottom:70px;
+}
+
+.section h2{
+  font-size:1.5rem;
+  margin-bottom:25px;
+  border-left:4px solid #22c55e;
+  padding-left:12px;
+}
+
+/* GRID */
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   gap:20px;
 }
 
-/* staff cards */
+/* CARD */
 .card{
-  background:rgba(255,255,255,0.05);
-  backdrop-filter:blur(8px);
-  padding:22px;
-  border-radius:14px;
-  text-align:center;
-  font-weight:600;
-  font-size:1.1rem;
-  color:#f1f5f9;
+  background:white;
+  border-radius:12px;
+  padding:25px;
+  box-shadow:0 10px 25px rgba(0,0,0,.05);
 }
 
-/* accordion regulament */
-details{
-  background:rgba(255,255,255,0.04);
-  padding:18px;
-  border-radius:12px;
-  margin-bottom:12px;
+.card h3{
+  margin-bottom:10px;
+  font-size:1.1rem;
 }
-summary{
-  font-size:1.15rem;
+
+/* FORM */
+form input, form textarea{
+  width:100%;
+  margin-top:10px;
+  padding:10px;
+  border:1px solid #d1d5db;
+  border-radius:6px;
+  font-family:Inter,sans-serif;
+}
+
+form button{
+  margin-top:15px;
+  padding:12px;
+  width:100%;
+  background:#22c55e;
+  border:none;
+  color:white;
+  border-radius:6px;
   font-weight:600;
   cursor:pointer;
 }
-.rule{margin-top:12px;opacity:.85}
-.sanction{margin-top:8px;color:#facc15;font-weight:700}
 
+/* STAFF */
+.staff-role{
+  font-weight:600;
+  color:#22c55e;
+  margin-bottom:6px;
+}
+
+/* FOOTER */
 footer{
+  background:white;
+  border-top:1px solid #e5e7eb;
+  padding:25px;
   text-align:center;
-  margin-top:80px;
-  opacity:.6;
-  font-size:.9rem;
+  color:#6b7280;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
-
-<!-- HEADER -->
 <header>
-  <h1>🍋 LEMON SMP</h1>
-  <p>Survival SMP • Comunitate activă • Vanilla+</p>
+  <h1>Lemon SMP</h1>
+  <p>Server Minecraft Survival Multiplayer</p>
 
-  <div>
-    <div class="button" onclick="navigator.clipboard.writeText('lemonsmp.mnt.li')">
-      IP: lemonsmp.mnt.li (Click to Copy)
-    </div>
-
-    <a class="button" href="https://discord.gg/avk5rAnVwD" target="_blank">
-      Join Discord
-    </a>
+  <div class="badges">
+    <span class="badge">IP: lemonsmp.mnt.li</span>
+    <span class="badge">Versiune: 1.20.x</span>
   </div>
 </header>
 
-<!-- REGULAMENT -->
+<div class="container">
+
+<!-- FORUM -->
 <div class="section">
-  <h2>📜 Regulament</h2>
+  <h2>Forum</h2>
 
-  <details>
-    <summary>1️⃣ Comportare respectuoasă</summary>
-    <div class="rule">
-      Tratează toți jucătorii și staff-ul cu respect. Limbajul ofensator sau hărțuirea nu sunt tolerate.
-      <div class="sanction">⚠️ Sancțiune: Warn / Mute 30 min</div>
+  <div class="grid">
+
+    <div class="card">
+      <h3>Cerere Unban</h3>
+      <form>
+        <input placeholder="Nume Minecraft">
+        <textarea rows="4" placeholder="Motivul banului"></textarea>
+        <textarea rows="4" placeholder="De ce consideri că meriți unban"></textarea>
+        <button>Trimite cererea</button>
+      </form>
     </div>
-  </details>
 
-  <details>
-    <summary>2️⃣ Interzis cheat-uri și exploatări</summary>
-    <div class="rule">
-      Hack-urile, cheat-urile și glitch-urile sunt strict interzise.
-      <div class="sanction">⚠️ Sancțiune: Ban 14 zile / Permanent</div>
+    <div class="card">
+      <h3>Aplicație Staff</h3>
+      <form>
+        <input placeholder="Nume Minecraft">
+        <input placeholder="Vârsta">
+        <textarea rows="4" placeholder="Experiență anterioară"></textarea>
+        <textarea rows="4" placeholder="De ce vrei să intri în staff"></textarea>
+        <button>Aplică</button>
+      </form>
     </div>
-  </details>
 
-  <details>
-    <summary>3️⃣ Spam & conținut nepotrivit</summary>
-    <div class="rule">
-      Spam-ul, caps lock-ul excesiv și conținutul ofensator nu sunt permise.
-      <div class="sanction">⚠️ Sancțiune: Mute 30 min / Permanent</div>
+    <div class="card">
+      <h3>Aplicație Media</h3>
+      <form>
+        <input placeholder="Nume Minecraft">
+        <input placeholder="YouTube / TikTok / Twitch">
+        <textarea rows="4" placeholder="De ce vrei Media"></textarea>
+        <button>Aplică</button>
+      </form>
     </div>
-  </details>
 
-  <details>
-    <summary>4️⃣ Tranzacții corecte</summary>
-    <div class="rule">
-      Escrocheriile și fraudele sunt interzise.
-      <div class="sanction">⚠️ Sancțiune: Warn</div>
-    </div>
-  </details>
-
-  <details>
-    <summary>5️⃣ Fără discuții politice sau religioase</summary>
-    <div class="rule">
-      Evită subiecte sensibile.
-      <div class="sanction">⚠️ Sancțiune: Ban 2 zile</div>
-    </div>
-  </details>
-
-  <details>
-    <summary>6️⃣ Respectarea deciziilor staff-ului</summary>
-    <div class="rule">
-      Urmează indicațiile staff-ului.
-      <div class="sanction">⚠️ Sancțiune: Warn</div>
-    </div>
-  </details>
-
-  <p style="text-align:center;margin-top:18px;color:#facc15;font-weight:700">
-    ❗ La 3 warn-uri → BAN 7 zile
-  </p>
+  </div>
 </div>
 
 <!-- STAFF -->
 <div class="section">
-  <h2>👮 Staff</h2>
+  <h2>Echipa Staff</h2>
+
   <div class="grid">
-    <div class="card">👑 Fondator<br><small>Mant0ni0</small></div>
-    <div class="card">⭐ Co-Fondator</div>
-    <div class="card">🛠️ Tehnic</div>
-    <div class="card">🛡️ Admin</div>
-    <div class="card">🔧 Moderator</div>
-    <div class="card">💬 Helper</div>
+
+    <div class="card">
+      <div class="staff-role">Fondator</div>
+      Mant0ni0<br>Kira
+    </div>
+
+    <div class="card">
+      <div class="staff-role">Co-Fondator</div>
+      qxerror
+    </div>
+
+    <div class="card">
+      <div class="staff-role">Tehnic</div>
+      Samir
+    </div>
+
+    <div class="card">
+      <div class="staff-role">Admin</div>
+      Deyyu
+    </div>
+
   </div>
 </div>
 
-<!-- COMUNITATE -->
-<div class="section">
-  <h2>💬 Comunitate</h2>
-  <div class="card">
-    Intră pe Discord pentru events, suport și o comunitate activă.
-  </div>
 </div>
 
 <footer>
-  © 2026 Lemon SMP • Minecraft Survival Multiplayer
+  © 2026 Lemon SMP • Website oficial
 </footer>
-
-</div>
 
 </body>
 </html>
